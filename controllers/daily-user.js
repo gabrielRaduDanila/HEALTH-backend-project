@@ -42,7 +42,13 @@ const getDayInfo = async (req, res) => {
   if (dayProducts.length === 0) {
     throw new NotFoundError('No product for that date');
   }
-  res.status(StatusCodes.OK).json({ dayProducts });
+  const totalDayCaloris = dayProducts.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.calories;
+  }, 0);
+
+  res
+    .status(StatusCodes.OK)
+    .json({ totalProducts: dayProducts.length, totalDayCaloris, dayProducts });
 };
 
 module.exports = { addProduct, deleteProduct, getDayInfo };
