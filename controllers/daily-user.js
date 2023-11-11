@@ -39,9 +39,7 @@ const getDayInfo = async (req, res) => {
     const reqDay = new Date(date);
     return getDate(productDate) === getDate(reqDay);
   });
-  if (dayProducts.length === 0) {
-    throw new NotFoundError('No product for that date');
-  }
+
   const totalDayCaloris = dayProducts.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.calories;
   }, 0);

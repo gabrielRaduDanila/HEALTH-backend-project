@@ -33,8 +33,15 @@ const register = async (req, res) => {
     password,
   });
   createdUser.setPass(password);
+  const payload = {
+    id: createdUser.id,
+    email: createdUser.email,
+    admin: false,
+  };
+  const token = jwt.sign(payload, SECRET, { expiresIn: '1w' });
+  createdUser.setToken(token);
   await createdUser.save();
-  res.status(StatusCodes.CREATED).json({ user: { name: user.name } });
+  res.status(StatusCodes.CREATED).json({ user: { name, email }, token });
 };
 
 const login = async (req, res) => {
