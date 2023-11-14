@@ -70,7 +70,9 @@ const login = async (req, res) => {
     const token = jwt.sign(payload, SECRET, { expiresIn: '1w' });
     user.setToken(token);
     await user.save();
-    res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
+    res
+      .status(StatusCodes.OK)
+      .json({ user: { name: user.name, email }, token });
   }
 };
 
@@ -89,8 +91,18 @@ const logout = async (req, res) => {
   return res.status(204).send();
 };
 
+const refreshUser = async (req, res) => {
+  const user = req.user;
+  if (!user) {
+    throw new UnauthenticatedError('Invalid Credentials');
+  }
+
+  return res.status(200).json({ email: user.email, name: user.name });
+};
+
 module.exports = {
   register,
   login,
   logout,
+  refreshUser,
 };
