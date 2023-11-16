@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const DailyUserInfo = require('../models/daily-user-info');
 const getDate = require('../functions/getDate');
-const { NotFoundError, UnauthenticatedError } = require('../errors');
+const { UnauthenticatedError } = require('../errors');
 
 const addProduct = async (req, res) => {
   const user = req.user;
@@ -33,11 +33,13 @@ const deleteProduct = async (req, res) => {
 const getDayInfo = async (req, res) => {
   const { _id } = req.user;
   const { date } = req.body;
+  console.log(date);
   const userProducts = await DailyUserInfo.find({ owner: _id });
   const dayProducts = userProducts.filter((p) => {
-    const productDate = new Date(p.date);
-    const reqDay = new Date(date);
-    return getDate(productDate) === getDate(reqDay);
+    // const productDate = new Date(p.date);
+    // const reqDay = new Date(date);
+    // console.log(reqDay);
+    return p.date === date;
   });
 
   const totalDayCaloris = dayProducts.reduce((accumulator, currentValue) => {

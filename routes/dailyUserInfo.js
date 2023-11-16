@@ -8,6 +8,6 @@ const {
 
 router.post('/', addProduct);
 router.delete('/:productId', deleteProduct);
-router.get('/day-info', getDayInfo);
+router.post('/day-info', getDayInfo);
 
 module.exports = router;

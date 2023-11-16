@@ -9,7 +9,7 @@ const getProductsList = (req, res) => {
       return product;
     }
   });
-  res.send(products);
+  res.status(200).json({ products });
 };
 
 module.exports = getProductsList;
