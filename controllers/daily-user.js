@@ -40,6 +40,7 @@ const getDayInfo = async (req, res) => {
     // const reqDay = new Date(date);
     // console.log(reqDay);
     return p.date === date;
+    // return productDate === reqDay;
   });
 
   const totalDayCaloris = dayProducts.reduce((accumulator, currentValue) => {

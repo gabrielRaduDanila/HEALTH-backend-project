@@ -93,11 +93,12 @@ const logout = async (req, res) => {
 
 const refreshUser = async (req, res) => {
   const user = req.user;
+  console.log(user);
   if (!user) {
     throw new UnauthenticatedError('Invalid Credentials');
   }
 
-  return res.status(200).json({ email: user.email, name: user.name });
+  return res.status(200).json({ user });
 };
 
 module.exports = {

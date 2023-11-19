@@ -29,10 +29,7 @@ const DailyUserInfoSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
   },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
+  date: String,
   title: String,
   weight: Number,
   categories: String,

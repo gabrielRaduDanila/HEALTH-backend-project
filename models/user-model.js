@@ -20,6 +20,8 @@ const user = new Schema({
     type: String,
     default: null,
   },
+  nonRecCategories: [{ type: String }],
+  calories: { type: Object },
 });
 
 user.methods.setPass = function (pass) {
